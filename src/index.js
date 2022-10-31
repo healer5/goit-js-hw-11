@@ -6,10 +6,11 @@ import axios from 'axios';
 const form = document.querySelector('.search-form');
 const input = document.querySelector('.input');
 const gallery = document.querySelector('.gallery');
-const searchBtn = document.querySelector('.search');
+// const searchBtn = document.querySelector('.search');
 const loadBtn = document.querySelector('.load-more');
 const MYAPI_KEY = '30111750-62c4a73e1cd4f265a4d4cd285';
 const myUrl = 'https://pixabay.com/api/';
+const simpleLightbox = new SimpleLightbox('.gallery a');
 
 let page = 1;
 let perPage = 40;
@@ -40,10 +41,7 @@ async function subHandle(event) {
       if (response.data.hits.length > 0) {
         loadBtn.classList.remove('is-hidden');
         render(response.data.hits);
-        const simpleLightbox = new SimpleLightbox('.gallery a', {
-          captionDelay: 250,
-          captionsData: 'alt',
-        }).refresh();
+        simpleLightbox.refresh();
         const totalHits = response.data.totalHits;
         Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`);
       }
@@ -52,6 +50,7 @@ async function subHandle(event) {
       }
     } catch (error) {
       console.log(error);
+      Notiflix.Notify.warning('Something went wrong. Try again');
     }
   }
 }
