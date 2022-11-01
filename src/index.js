@@ -107,7 +107,7 @@ async function subLoad(event) {
       getUrlApi(MYAPI_KEY, inputValue, page, perPage)
     );
     render(response.data.hits);
-    const simpleLightbox = new SimpleLightbox('.gallery a').refresh();
+    simpleLightbox.refresh();
     const maxValue = Math.floor(response.data.totalHits / perPage);
     if (maxValue < page) {
       loadBtn.classList.add('is-hidden');
